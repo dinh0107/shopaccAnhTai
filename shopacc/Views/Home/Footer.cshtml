@@ -1,0 +1,53 @@
+﻿@using shopacc.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+}
+
+<div class="mobile-menu-tab d-lg-none d-flex">
+    <a href="/" title="Sản phẩm mới"><i class="fa-solid fa-list"></i> <span>Acc mới</span></a>
+    <a href="@Url.Action("ProductList")" title="Sản phẩm cho thuê"><i class="fa-solid fa-list"></i> <span>Acc cho thuê</span></a>
+    <a href="@Url.Action("TinhGop")" class="" title="Tích góp"><i class="fa-solid fa-money-bill"></i><span>Tính Góp</span></a>
+    <a href="@Url.Action("NapUc")" title="Nạp UC" class=""><i class="fa-solid fa-layer-group"></i><span>Nạp UC</span></a>
+</div>
+
+
+<footer class="bg-black text-white py-12 mt-3">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="body-html text-white">
+               @Html.Raw(config.Footer)
+            </div>
+
+            <!-- Danh mục nổi bật -->
+            <div>
+                <div class="font-semibold mb-4 text-[14px]">Danh mục nổi bật</div>
+                <ul class="space-y-2 ul-reset">
+                    <li><a href="/" class="text-white text-[13px] hover:text-white transition">Acc Mới Nhất</a></li>
+                    <li><a href="@Url.Action("ProductList")" class="text-white text-[13px] hover:text-white transition">Acc Đã Bán</a></li>
+                </ul>
+            </div>
+
+            <!-- Liên hệ -->
+            <div>
+                <div class="font-semibold mb-4 text-[14px]">Liên hệ</div>
+                <ul class="space-y-2 ul-reset">
+                    <li><a href="@config.Zalo" class="text-white text-[13px] hover:text-white transition">Zalo</a></li>
+                    <li><a href="@config.Facebook" class="text-white text-[13px] hover:text-white transition">Facebook</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold mb-4 text-[14px]">Dịch vụ khác</div>
+                <ul class="space-y-2 ul-reset">
+                    <li><a href="/" class="text-white text-[13px] hover:text-white transition">Shop acc game</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<div class="contact">
+    <a href="@config.Zalo" class="zalo"><img src="~/Content/images/icons8-zalo.svg" alt="Alternate Text" /></a>
+    <a href="@config.Facebook" class="mess"><img src="~/Content/images/messanger-icon-flat-design-by-Vexels.png" alt="Alternate Text" /></a>
+    <a href="tel:@config.Hotline" class="fone"><i class="fal fa-phone-alt"></i></a>
+</div>

@@ -1,0 +1,215 @@
+﻿@model shopacc.ViewModel.InsertProductViewModel
+@{
+    ViewBag.Title = "Cập nhật acc";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="page-title">
+        <i class="fa-solid fa-align-right fa-rotate-180 fa-sm"></i>
+        <span>Cập nhật acc</span>
+    </div>
+    <a href="#" onclick="history.go(-1)" class="btn-main btn-labeled bg-brown">
+        <span class="icon">
+            <i class="fa-solid fa-left"></i>
+        </span>
+        Quay lại
+    </a>
+</div>
+<div class="content">
+    <div class="accordion">
+        <div class="accordion-item border-left-slate">
+            <div class="accordion-header">
+                <div class="card-title">
+                    <i class="fa-light fa-octagon-plus fa-lg"></i>
+                    Cập nhật acc
+                </div>
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#editForm" aria-expanded="true">
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div>
+            <div id="editForm" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    @using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(a => a.Product.Id)
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.TypeAcc, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.EnumDropDownListFor(a => a.Product.TypeAcc, new { @class = "form_control" })
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-lg-3" for="Product_Name">Tên sản phẩm <span class="text-danger">*</span></label>
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.Name)
+                            </div>
+                        </div>
+                        <div id="ListImage" class="mb-3 row" }>
+                            <div class="col-form-label col-lg-3">@Html.LabelFor(model => model.Product.ListImage)</div>
+                            <div class="col-lg-9">
+                                <div class="alert alert-info">
+                                    <p class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Chọn ảnh...</span>
+                                        <input type="file" id="fileupload" name="files[]" accept="image/*" multiple="" />
+                                    </p><br />
+                                    - Chọn ảnh để upload: (gif, png, jpg, jpeg < 4MB)<br />
+                                    - Kích thước: 800x 800px<br />
+                                    - Ảnh đầu tiên sẽ là ảnh đại diện<br />
+                                </div>
+                                <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-form-label col-lg-3"></div>
+                            <div class="col-lg-9">
+                                <ul id="ListImages">
+                                    @if (Model.Product.ListImage != null)
+                                    {
+                                        var i = 1;
+                                        var arrPic = Model.Product.ListImage.Split(',');
+                                        foreach (var item in arrPic)
+                                        {
+                                            <li class="thumb-img-box">
+                                                <input type="hidden" name="Pictures" value="@item" />
+                                                <img src="@Path.Combine("/images/product/",item)?w=80&h=80&mode=crop" alt="" />
+                                                <a href="javascript:;" id="@i" onclick="delfile( '@i')"><img src="~/Content/images/admin/icon-delete.png" alt="" /></a>
+                                            </li>
+                                            i = i + 1;
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.Body, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.Body)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Price, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Price)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.NgoaiTe, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.NgoaiTe)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.Url, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.Url)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.ChoThue, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                <label class="form-check-label">
+                                    <input type="checkbox" name="Product.ChoThue" @if (Model.Product.ChoThue) { @Html.Raw("value='true' checked")  } else { @Html.Raw("value='false'") } />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.Active, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                <label class="form-check-label">
+                                    <input type="checkbox" name="Product.Active" @if (Model.Product.Active) { @Html.Raw("value='true' checked")  } else { @Html.Raw("value='false'") } />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.Sort, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(a => a.Product.Sort)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.TitleMeta, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.TitleMeta)
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            @Html.LabelFor(a => a.Product.DescriptionMeta, new { @class = "col-form-label col-lg-3" })
+                            <div class="col-9">
+                                @Html.EditorFor(a => a.Product.DescriptionMeta)
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn-main btn-primary text-white">
+                                <span>Lưu</span>
+                                <i class="fa-solid fa-floppy-disk ms-2"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#ListImages").sortable();
+            $("#ListImages").disableSelection();
+        });
+        var i = 1;
+        $("#fileupload").fileupload({
+            add: function (e, data) {
+                var uploadErrors = [];
+                var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+                if (data.originalFiles[0]["type"].length && !acceptFileTypes.test(data.originalFiles[0]["type"])) {
+                    uploadErrors.push("Chỉ chấp nhận định dạng jpeg, jpg, png, gif");
+                }
+                if (data.originalFiles[0]["size"] > 4000000) {
+                    uploadErrors.push("Dung lượng ảnh lớn hơn 4MB");
+                }
+                var totalImg = $("#ListImages .thumb-img-box").length;
+                if (totalImg >= 10) {
+                    uploadErrors.push("Chỉ đăng tối đa 10 ảnh");
+                }
+                if (uploadErrors.length > 0) {
+                    alert(uploadErrors.join("\n"));
+                    return false;
+                } else {
+                    data.submit();
+                }
+                return true;
+            },
+            url: "/Uploader/Upload?folder=product&r=" + Math.random(),
+            dataType: "json",
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('#ListImages').append('<li class="thumb-img-box"><input type="hidden" name="Pictures" value ="' + file.name + '" /><img src="/images/product/' + file.name + '?w=80&h=80"/><a href="javascript:;" id="' + i + '" onclick="delfile(' + i + ')"><img src="/Content/images/admin/icon-delete.png" alt="" style="vertical-align:middle" /></a></li>');
+                });
+                i = i + 1;
+                $("#progress").fadeOut(2000);
+            },
+            start: function () {
+                $("#progress .progress-bar").css("width", "0");
+                $("#progress").show();
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress .progress-bar").css("width", progress + "%");
+            }
+        }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+        function delfile(divid) {
+            if (confirm('Bạn có chắc xóa ảnh này?')) {
+                $('#' + divid).parent().fadeOut().remove();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿@model shopacc.ViewModel.NapUcViewModel
+@using shopacc.Models
+@using System.Globalization
+
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = "Nạp Uc";
+    var culture = new CultureInfo("vi-VN");
+}
+
+<div class="bg-[#FDF6F1] px-4 sm:px-8 lg:px-20 py-4 sm:py-5">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 p-0">
+            <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">
+                    Trang chủ
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center space-x-1.5">
+                    <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">Nạp Uc</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+    <strong>Bảng Giá Nạp UC</strong>
+</div>
+<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
+    <strong>BẢNG GIÁ NẠP UC VNG</strong>
+    <table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" class="table table-bordered text-center mt-3">
+        <colgroup>
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Price (USDT)&quot;}"><strong>Giá</strong></td>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;1st&quot;}"><strong>Nạp Lần 1</strong></td>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;2nd&quot;}"><strong>Nạp Lần 2</strong></td>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;3rd&quot;}"><strong>Nạp Lần 3+</strong></td>
+            </tr>
+            @foreach (var item in Model.Tables)
+            {
+                <tr>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:45413}" data-sheets-numberformat="{&quot;1&quot;:5,&quot;2&quot;:&quot;d.m&quot;,&quot;3&quot;:1}">@item.Price</td>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:88}">@item.Lan1</td>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:82}">@item.Lan2</td>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:68}">@item.Lan3</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</section>
+<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
+    <strong>BẢNG GIÁ NẠP UC QUỐC TẾ</strong>
+    <table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" class="table table-bordered text-center mt-3">
+        <colgroup>
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Price (USDT)&quot;}"><strong>Giá</strong></td>
+                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;1st&quot;}"><strong>UC</strong></td>
+            </tr>
+            @foreach (var item in Model.TablesQT)
+            {
+                <tr>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:45413}" data-sheets-numberformat="{&quot;1&quot;:5,&quot;2&quot;:&quot;d.m&quot;,&quot;3&quot;:1}">@item.Price</td>
+                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:88}">@item.Lan1</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</section>

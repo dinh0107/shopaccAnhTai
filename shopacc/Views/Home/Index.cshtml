@@ -1,0 +1,239 @@
+﻿@model shopacc.ViewModel.HomeViewModel
+@using shopacc.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = config.Title;
+    ViewBag.Description = config.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index", "Home");
+    var fb = Model.Banners.FirstOrDefault();
+    if (fb != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
+    }
+}
+<div class="flex items-center justify-center px-2 sm:px-8 lg:px-20 py-4 bg-[#ffd8bb]">
+    <div class="w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+        <div class="relative h-[160px] sm:h-[300px] lg:h-[400px] overflow-hidden">
+            <div class="slider-container h-full">
+                <div class="autoplay h-full">
+                    @foreach (var item in Model.Banners)
+                    {
+                        <div class="slide active h-full">
+                            <img src="@Path.Combine("/images/banners/", item.Image)"
+                                 alt="@item.BannerName"
+                                 class="w-full h-full object-cover">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="relative -mt-20 sm:-mt-24 lg:-mt-30 px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8">
+            <div class="flex flex-col items-center text-center">
+
+                <div class="w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] lg:w-[200px] lg:h-[200px]
+                            rounded-full border-4 sm:border-6 lg:border-8 border-white
+                            shadow-2xl bg-gray-200 mb-4 avatar noel">
+                    <img src="~/Content/images/santa-cap.png" alt="cap" class="cap">
+                    @if (config.Avatar != null)
+                    {
+                        <img src="@Path.Combine("/images/configs/", config.Avatar)"
+                             alt="Profile"
+                             class="w-full h-full object-cover img-avt">
+                    }
+                </div>
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="text-lg sm:text-[18px] lg:text-2xl font-bold text-gray-800">
+                        @config.Name
+                    </div>
+                    <div class="verified-badge">
+                        <img src="~/Content/images/verry.png"
+                             class="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                             alt="verry" />
+                    </div>
+                </div>
+
+                <div class="body-html text-sm sm:text-base max-w-3xl">
+                    @Html.Raw(config.Profile)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
+    <div class="p-4 sm:p-6 mb-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1" style="font-weight:700">Sản phẩm nổi bật</h1>
+            <p class="text-sm text-gray-500">Shop acc game tốt nhất dành cho bạn</p>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+            <div class="flex flex-wrap gap-2 flex-1">
+                <div class="filter-btn active px-4 py-2 text-sm rounded-full border-2 border-orange-500 font-medium" data-filter="all">
+                    Tất cả
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="under-1m">
+                    Dưới 1m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="1m-5m">
+                    1m - 5m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="5m-10m">
+                    5m - 10m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="10m-15m">
+                    10m - 15m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="15m-20m">
+                    15m - 20m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="20m-50m">
+                    20m - 50m
+                </div>
+                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="50m+">
+                    50m+
+                </div>
+            </div>
+
+            <div class="lg:w-56">
+                <select class="w-full px-4 py-2 text-sm border-2 border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 text-gray-600 font-medium cursor-pointer bg-white">
+                    <option value="newest">Sản phẩm mới nhất</option>
+                    <option value="oldest">Sản phẩm cũ nhất</option>
+                    <option value="price-low">Giá thấp đến cao</option>
+                    <option value="price-high">Giá cao đến thấp</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="sort">
+        @Html.Action("ProductSort")
+    </div>
+</section>
+
+<div id="popup" class="hidden popup-overlay fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 p-4">
+    <div class="popup-content bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+        <div class="px-6 pt-3 text-white relative">
+            <div class="text-[20px] pb-2 text-black font-bold mb-4 border-b">Thông báo</div>
+        </div>
+        <div class="px-6 body-html">
+            @Html.Raw(config.Body)
+        </div>
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 justify-end">
+            <div id="confirmBtn" class="text-[14px] px-5 py-2 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors cursor-pointer">
+                Không hiển thị trong 2 giờ
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('.autoplay').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000, dots: false, arrows: false,
+        });
+        $(document).ready(function () {
+            // Check if popup should be shown based on last close time
+            function checkPopupTimer() {
+                const lastCloseTime = localStorage.getItem('popupLastCloseTime');
+                if (lastCloseTime) {
+                    const currentTime = new Date().getTime();
+                    const timeDiff = currentTime - parseInt(lastCloseTime);
+                    const twoHoursInMs = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+
+                    if (timeDiff < twoHoursInMs) {
+                        return false; // Don't show popup
+                    }
+                }
+                return true; // Show popup
+            }
+
+            // Save close time to localStorage
+            function saveCloseTime() {
+                const currentTime = new Date().getTime();
+                localStorage.setItem('popupLastCloseTime', currentTime.toString());
+            }
+
+            // Function to close popup
+            function closePopup() {
+                $('#popup').removeClass('flex').addClass('hidden');
+                saveCloseTime();
+            }
+
+            // Auto show popup on page load if timer allows
+            if (checkPopupTimer()) {
+                $('#popup').removeClass('hidden').addClass('flex');
+            }
+
+            // Close popup when clicking "Không hiển thị trong 2 giờ" button
+            $('#confirmBtn').click(function () {
+                closePopup();
+            });
+
+            // Close popup when clicking overlay
+            $('#popup').click(function (e) {
+                if (e.target === this) {
+                    closePopup();
+                }
+            });
+
+            // Close with ESC key
+            $(document).keydown(function (e) {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        });
+
+        $(document).ready(function() {
+        var currentPrice = 'all';
+        var currentSort = 'newest';
+
+        // Xử lý click vào nút lọc giá
+        $('.filter-btn').on('click', function() {
+            // Remove active class từ tất cả buttons
+            $('.filter-btn').removeClass('active border-orange-500 text-orange-500')
+                           .addClass('border-gray-200 text-gray-600');
+
+            // Add active class cho button được click
+            $(this).addClass('active border-orange-500 text-orange-500')
+                   .removeClass('border-gray-200 text-gray-600');
+
+            // Lấy giá trị filter
+            currentPrice = $(this).data('filter');
+
+            // Gọi hàm load sản phẩm
+            loadProducts();
+        });
+
+        // Xử lý thay đổi dropdown sort
+        $('select').on('change', function() {
+            currentSort = $(this).val();
+            loadProducts();
+        });
+
+        // Hàm load sản phẩm qua AJAX
+        function loadProducts() {
+            // Hiển thị loading indicator (optional)
+            $('#sort').html('<div class="text-center py-8"><i class="fas fa-spinner fa-spin text-3xl text-orange-500"></i></div>');
+
+            $.ajax({
+                url: '@Url.Action("ProductSort", "Home")',
+                type: 'GET',
+                data: {
+                    price: currentPrice,
+                    sort: currentSort
+                },
+                success: function(response) {
+                    $('#sort').html(response);
+                },
+                error: function() {
+                    $('#sort').html('<div class="text-center py-8 text-red-500">Có lỗi xảy ra. Vui lòng thử lại!</div>');
+                }
+            });
+        }
+    });
+    </script>
+}

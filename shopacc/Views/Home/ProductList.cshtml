@@ -1,0 +1,102 @@
+﻿@using shopacc.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = "Acc cho thuê";
+}
+
+<div class="bg-[#FDF6F1] px-4 sm:px-8 lg:px-20 py-4 sm:py-5">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 p-0">
+            <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">
+                    Trang chủ
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center space-x-1.5">
+                    <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">Acc cho thuê</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+    <strong>Acc cho thuê</strong>
+</div>
+<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
+    <div class="p-2 sm:p-6 mb-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1" style="font-weight:700">Tài khoản cho thuê</h1>
+            <p class="text-sm text-gray-500">Shop acc game tốt nhất dành cho bạn</p>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+            <div class="lg:w-56">
+                <select class="w-full px-4 py-2 text-sm border-2 border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 text-gray-600 font-medium cursor-pointer">
+                    <option value="newest">Sản phẩm mới nhất</option>
+                    <option value="oldest">Sản phẩm cũ nhất</option>
+                    <option value="price-low">Giá thấp đến cao</option>
+                    <option value="price-high">Giá cao đến thấp</option>
+                    <option value="popular">Phổ biến nhất</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="sort">
+        @Html.Action("ProductSort", new { typePage = 1 })
+    </div>
+</section>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+        var currentPrice = 'all';
+        var currentSort = 'newest';
+
+        // Xử lý click vào nút lọc giá
+        $('.filter-btn').on('click', function() {
+            // Remove active class từ tất cả buttons
+            $('.filter-btn').removeClass('active border-orange-500 text-orange-500')
+                           .addClass('border-gray-200 text-gray-600');
+
+            // Add active class cho button được click
+            $(this).addClass('active border-orange-500 text-orange-500')
+                   .removeClass('border-gray-200 text-gray-600');
+
+            // Lấy giá trị filter
+            currentPrice = $(this).data('filter');
+
+            // Gọi hàm load sản phẩm
+            loadProducts();
+        });
+
+        // Xử lý thay đổi dropdown sort
+        $('select').on('change', function() {
+            currentSort = $(this).val();
+
+            // Gọi hàm load sản phẩm
+            loadProducts();
+        });
+
+        // Hàm load sản phẩm qua AJAX
+        function loadProducts() {
+            // Hiển thị loading indicator (optional)
+            $('#sort').html('<div class="text-center py-8"><i class="fas fa-spinner fa-spin text-3xl text-orange-500"></i></div>');
+
+            $.ajax({
+                url: '@Url.Action("ProductSort", "Home")',
+                type: 'GET',
+                data: {
+                    price: currentPrice,
+                    sort: currentSort
+                },
+                success: function(response) {
+                    $('#sort').html(response);
+                },
+                error: function() {
+                    $('#sort').html('<div class="text-center py-8 text-red-500">Có lỗi xảy ra. Vui lòng thử lại!</div>');
+                }
+            });
+        }
+    });
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model shopacc.Models.Product
+
+<a href="@Url.Action("ProductDetail", new {url = Model.Url})" class="bg-white rounded-xl shadow-lg overflow-hidden border">
+    @if (Model.ListImage != null)
+    {
+        <img src="@Path.Combine("/images/product/", Model.ListImage.Split(',')[0])"
+             alt="@Model.Name"
+             class="w-full h-56 object-cover">
+    }
+
+
+    <div class="px-4 pt-4 pb-2 text-center">
+        <div class="flex justify-between items-center">
+            <div class="flex justify-center mb-3">
+                @if (Model.ChoThue)
+                {
+                    <span class="bg-red-500 text-white text-sm px-3 py-1 rounded-full flex items-center gap-1">
+                        <span class="w-2 h-2 bg-white rounded-full"></span>
+                        Đã bán
+                    </span>
+                }
+                else
+                {
+                    <span class="bg-green-500 text-white text-sm px-3 py-1 rounded-full flex items-center gap-1">
+                        <span class="w-2 h-2 bg-white rounded-full"></span>
+                        Còn Hàng
+                    </span>
+                }
+            </div>
+
+            <p class="text-lg font-semibold text-left">
+                Mã Acc:
+                <span class="font-bold block">@Model.Name</span>
+            </p>
+        </div>
+
+        <div class="border-t border-dashed w-full"></div>
+
+        <p class="text-xl font-semibold pt-3">
+            Giá:
+            <span class="text-red-600">
+                @Html.DisplayFor(a => Model.Price)
+                @if (Model.NgoaiTe != null)
+                {
+                    @:(@Model.NgoaiTe)
+                }
+            </span>
+        </p>
+    </div>
+</a>

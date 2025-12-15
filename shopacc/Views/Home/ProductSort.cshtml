@@ -1,0 +1,18 @@
+﻿@model shopacc.ViewModel.ProductFilterViewModel
+@if (Model.Products.Any())
+{
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach (var item in Model.Products)
+        {
+            @Html.Partial("_ProductItem", item)
+        }
+
+
+    </div>          
+}
+else
+            {
+                <div class="text-center">
+                    Không có acc trong khoảng giá này !!
+                </div>
+            }

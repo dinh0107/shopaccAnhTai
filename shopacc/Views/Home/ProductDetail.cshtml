@@ -1,0 +1,157 @@
+﻿@model shopacc.ViewModel.ProductDetail
+@using shopacc.Models
+@using Helpers
+@using System.Globalization
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = Model.Product.TitleMeta ?? Model.Product.Name;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", new { url = Model.Product.Url });
+    if (Model.Product.ListImage != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/product/", Model.Product.ListImage.Split(',')[0]);
+    }
+    var discount = Model.Product.Price * 0.3m;
+    var culture = new CultureInfo("vi-VN");
+
+
+    var cdn = "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css\" />\r\n<script src=\"https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js\"></script>";
+}
+<div class="bg-[#FDF6F1] px-4 sm:px-8 lg:px-20 py-4 sm:py-5">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 p-0">
+            <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">
+                    Trang chủ
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center space-x-1.5">
+                    <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">acc mới</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+    <strong>#@Model.Product.Name</strong>
+</div>
+
+<div class="container mx-auto p-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <div class="slider-container mb-4 rounded-lg overflow-hidden">
+                    @if (Model.Product.ListImage != null)
+                    {
+                        var arr = Model.Product.ListImage.Split(',');
+                        <div class="slider-wrapper slider-for" id="slider-for">
+                            @foreach (var item in arr)
+                            {
+                                var imgPath = Path.Combine("/images/product/", item);
+
+                                <div class="slider-item-img">
+                                    <a href="@imgPath"
+                                       data-fancybox="product-gallery"
+                                       data-caption="@Model.Product.Name">
+                                        <img src="@imgPath"
+                                             alt="@Model.Product.Name"
+                                             class="w-full h-auto cursor-pointer">
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="slider-nav">
+                    @if (Model.Product.ListImage != null)
+                    {
+                        var arr = Model.Product.ListImage.Split(',');
+                        foreach (var item in arr)
+                        {
+                            <img src="@Path.Combine("/images/product/", item)" alt="@Model.Product.Name" class="thumbnail active rounded">
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <div class="text-xl font-bold mb-4">Mô tả</div>
+                <div class="text-gray-600 body-html">
+                    @Html.Raw(Model.Product.Body)
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-6">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4 sm:mb-6">
+                    <span class="text-sm sm:text-base text-gray-600">
+                        Giá bán:
+                    </span>
+
+                    <span class="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600">
+                        @Html.DisplayFor(a => Model.Product.Price)
+                        @if (Model.Product.NgoaiTe != null)
+                        {
+                            <span class="ml-1 text-base sm:text-lg">
+                                (@Model.Product.NgoaiTe)
+                            </span>
+                        }
+                    </span>
+                </div>
+
+                <a href="@config.Facebook"
+                   class="flex items-center justify-center gap-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700
+              text-white text-sm sm:text-base py-2 transition">
+                    <i class="fa fa-shopping-cart"></i>
+                    Mua Ngay
+                </a>
+            </div>
+
+
+            <!-- Mua trả góp -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2 text-[14px]">Giá Của Acc:</label>
+                    <input type="text" value="@Html.DisplayFor(a => Model.Product.Price)" readonly class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-[14px]">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2 text-[14px]">Trả Trước 30%:</label>
+                    <input type="text" value="@discount.ToString("C0", culture)" readonly class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-[14px]">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Raw(cdn)
+
+@section scripts{
+    <script>
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: false,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true
+        });
+        Fancybox.bind("[data-fancybox='product-gallery']", {
+            Thumbs: {
+                autoStart: true,
+            },
+            Toolbar: {
+                display: ["close"],
+            },
+        });
+
+    </script>
+}

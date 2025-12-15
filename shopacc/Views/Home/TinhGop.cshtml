@@ -1,0 +1,48 @@
+﻿@model shopacc.ViewModel.TinhGopViewModel
+@using shopacc.Models
+@using System.Globalization
+
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = "Tính góp";
+    var culture = new CultureInfo("vi-VN");
+}
+
+<div class="bg-[#FDF6F1] px-4 sm:px-8 lg:px-20 py-4 sm:py-5">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 p-0">
+            <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">
+                    Trang chủ
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center space-x-1.5">
+                    <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">Acc cho thuê</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+    <strong>Tính góp</strong>
+</div>
+<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <form action="@Url.Action("TinhGop")" method="post">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2 text-[14px]">Giá Của Acc:</label>
+                <input type="text" value=" @Model.Gia.ToString("C0", culture)" name="gia" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-[14px]">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2 text-[14px]">Trả Trước 30%:</label>
+                <input type="text" value=" @Model.GiaGop.ToString("C0", culture)" readonly class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-[14px]">
+            </div>
+
+            <button type="submit" class="flex items-center justify-center gap-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700
+text-white text-sm sm:text-base py-2 transition">
+                Tính ngay
+            </button>
+        </form>
+    </div>
+</section>
