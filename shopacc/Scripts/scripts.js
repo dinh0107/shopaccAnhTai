@@ -1,25 +1,25 @@
-﻿function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
+﻿//function createSnowflake() {
+//    const snowflake = document.createElement('div');
+//    snowflake.classList.add('snowflake');
 
-    // Random snowflake symbols
-    const symbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
-    snowflake.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+//    // Random snowflake symbols
+//    const symbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
+//    snowflake.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
 
-    snowflake.style.left = Math.random() * 100 + '%';
-    snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
-    snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-    snowflake.style.setProperty('--left-ini', Math.random() * 20 - 10 + 'vw');
-    snowflake.style.setProperty('--left-end', Math.random() * 20 - 10 + 'vw');
-    snowflake.style.animationDuration = (Math.random() * 8 + 5) + 's';
-    snowflake.style.animationDelay = Math.random() * 3 + 's';
+//    snowflake.style.left = Math.random() * 100 + '%';
+//    snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
+//    snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+//    snowflake.style.setProperty('--left-ini', Math.random() * 20 - 10 + 'vw');
+//    snowflake.style.setProperty('--left-end', Math.random() * 20 - 10 + 'vw');
+//    snowflake.style.animationDuration = (Math.random() * 8 + 5) + 's';
+//    snowflake.style.animationDelay = Math.random() * 3 + 's';
 
-    document.body.appendChild(snowflake);
+//    document.body.appendChild(snowflake);
 
-    setTimeout(() => {
-        snowflake.remove();
-    }, 15000);
-}
+//    setTimeout(() => {
+//        snowflake.remove();
+//    }, 15000);
+//}
 
 // Create snowflakes periodically
 setInterval(createSnowflake, 150);

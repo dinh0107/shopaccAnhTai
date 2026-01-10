@@ -96,7 +96,7 @@ namespace shopacc.Controllers
                                 "-" + DateTime.Now.Millisecond + Path.GetExtension(file2.FileName);
 
                             model.Banner.Image2 = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
-                            file.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
+                            file2.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
                         }
                     }
                 }
@@ -185,7 +185,7 @@ namespace shopacc.Controllers
                                 "-" + DateTime.Now.Millisecond + Path.GetExtension(file2.FileName);
 
                             banner.Image2 = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
-                            file.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
+                            file2.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
                         }
                     }
                 }

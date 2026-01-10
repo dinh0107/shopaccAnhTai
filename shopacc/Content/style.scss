@@ -662,12 +662,48 @@ table:first-of-type {
     }
 }
 
-.close-header{
-    color:#000;
-    padding-right:20px;
+.close-header {
+    color: #000;
+    padding-right: 20px;
 }
 
+.banner-mb {
+    display: none;
+}
+
+.hoa-dao {
+    position: fixed;
+    width: 150px;
+    object-fit: contain;
+    top: 0;
+    z-index: 9;
+}
+
+.hoa-dao-right {
+    right: 0;
+}
+
+.hoa-dao-left {
+    left: 0;
+}
+
+
 @include maxWidth(600px) {
+    .banner-desk {
+        display: none;
+    }
+
+    #menuToggle{
+        z-index:9999;
+    } .banner-mb {
+        display: block;
+    }
+
+    .hoa-dao-right {
+        height: 150px;
+        width: 91px;
+    }
+
     .slider-nav {
         @include letterSpacing(5px, -5px);
 
@@ -737,5 +773,3 @@ table:first-of-type {
         }
     }
 }
-
-

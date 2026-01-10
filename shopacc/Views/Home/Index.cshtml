@@ -14,15 +14,33 @@
 <div class="flex items-center justify-center px-2 sm:px-8 lg:px-20 py-4 bg-[#ffd8bb]">
     <div class="w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
         <div class="relative h-[160px] sm:h-[300px] lg:h-[400px] overflow-hidden">
-            <div class="slider-container h-full">
+            <div class="slider-container h-full banner-desk">
                 <div class="autoplay h-full">
                     @foreach (var item in Model.Banners)
                     {
-                        <div class="slide active h-full">
-                            <img src="@Path.Combine("/images/banners/", item.Image)"
-                                 alt="@item.BannerName"
-                                 class="w-full h-full object-cover">
-                        </div>
+                        if (item.Image != null)
+                        {
+                            <div class="slide active h-full">
+                                <img src="@Path.Combine("/images/banners/", item.Image)"
+                                     alt="@item.BannerName"
+                                     class="w-full h-full object-cover">
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="h-full banner-mb">
+                <div class="autoplay h-full">
+                    @foreach (var item in Model.Banners)
+                    {
+                        if (item.Image2 != null)
+                        {
+                            <div class="slide active h-full">
+                                <img src="@Path.Combine("/images/banners/", item.Image2)"
+                                     alt="@item.BannerName"
+                                     class="w-full h-full object-cover">
+                            </div>
+                        }
                     }
                 </div>
             </div>
@@ -34,7 +52,7 @@
                 <div class="w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] lg:w-[200px] lg:h-[200px]
                             rounded-full border-4 sm:border-6 lg:border-8 border-white
                             shadow-2xl bg-gray-200 mb-4 avatar noel">
-                    <img src="~/Content/images/santa-cap.png" alt="cap" class="cap">
+                    @*<img src="~/Content/images/santa-cap.png" alt="cap" class="cap">*@
                     @if (config.Avatar != null)
                     {
                         <img src="@Path.Combine("/images/configs/", config.Avatar)"

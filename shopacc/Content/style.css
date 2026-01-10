@@ -538,7 +538,40 @@ table:first-of-type {
   padding-right: 20px;
 }
 
+.banner-mb {
+  display: none;
+}
+
+.hoa-dao {
+  position: fixed;
+  width: 150px;
+  object-fit: contain;
+  top: 0;
+  z-index: 9;
+}
+
+.hoa-dao-right {
+  right: 0;
+}
+
+.hoa-dao-left {
+  left: 0;
+}
+
 @media (max-width: 600px) {
+  .banner-desk {
+    display: none;
+  }
+  #menuToggle {
+    z-index: 9999;
+  }
+  .banner-mb {
+    display: block;
+  }
+  .hoa-dao-right {
+    height: 150px;
+    width: 91px;
+  }
   .slider-nav .slick-slide {
     margin: 0 5px;
   }
