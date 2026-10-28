@@ -1,4 +1,4 @@
-﻿@model shopacc.ViewModel.ProductFilterViewModel
+@model shopacc.ViewModel.ProductFilterViewModel
 @if (Model.Products.Any())
 {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -11,8 +11,16 @@
     </div>          
 }
 else
-            {
-                <div class="text-center">
-                    Không có acc trong khoảng giá này !!
-                </div>
-            }
+{
+    <div class="empty-state-box my-6">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-slate-200/70 mb-3 text-slate-500">
+            <i class="fa-solid fa-box-open text-2xl"></i>
+        </div>
+        <div class="empty-text">
+            Không có tài khoản trong khoảng giá này!
+        </div>
+        <p class="empty-subtext">
+            Vui lòng chọn khoảng giá khác hoặc quay lại sau.
+        </p>
+    </div>
+}

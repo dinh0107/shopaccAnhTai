@@ -1,4 +1,4 @@
-﻿@using shopacc.Models
+@using shopacc.Models
 @{
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
 }
@@ -20,25 +20,25 @@
 
             <!-- Danh mục nổi bật -->
             <div>
-                <div class="font-semibold mb-4 text-[14px]">Danh mục nổi bật</div>
+                <div class="footer-col-title font-bold mb-4 text-[15px] text-white">Danh mục nổi bật</div>
                 <ul class="space-y-2 ul-reset">
-                    <li><a href="/" class="text-white text-[13px] hover:text-white transition">Acc Mới Nhất</a></li>
-                    <li><a href="@Url.Action("ProductList")" class="text-white text-[13px] hover:text-white transition">Acc Đã Bán</a></li>
+                    <li><a href="/" class="footer-link">Acc Mới Nhất</a></li>
+                    <li><a href="@Url.Action("ProductList")" class="footer-link">Acc Đã Bán</a></li>
                 </ul>
             </div>
 
             <!-- Liên hệ -->
             <div>
-                <div class="font-semibold mb-4 text-[14px]">Liên hệ</div>
+                <div class="footer-col-title font-bold mb-4 text-[15px] text-white">Liên hệ</div>
                 <ul class="space-y-2 ul-reset">
-                    <li><a href="@config.Zalo" class="text-white text-[13px] hover:text-white transition">Zalo</a></li>
-                    <li><a href="@config.Facebook" class="text-white text-[13px] hover:text-white transition">Facebook</a></li>
+                    <li><a href="@(config?.Zalo ?? "#")" class="footer-link" target="_blank">Zalo</a></li>
+                    <li><a href="@(config?.Facebook ?? "#")" class="footer-link" target="_blank">Facebook</a></li>
                 </ul>
             </div>
             <div>
-                <div class="font-semibold mb-4 text-[14px]">Dịch vụ khác</div>
+                <div class="footer-col-title font-bold mb-4 text-[15px] text-white">Dịch vụ khác</div>
                 <ul class="space-y-2 ul-reset">
-                    <li><a href="/" class="text-white text-[13px] hover:text-white transition">Shop acc game</a></li>
+                    <li><a href="/" class="footer-link">Shop acc game</a></li>
                 </ul>
             </div>
         </div>

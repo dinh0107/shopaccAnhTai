@@ -1,31 +1,37 @@
-﻿@using shopacc.Models
+@using shopacc.Models
 @{
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
 }
 
-<header class="bg-white shadow-md">
+<header class="site-header shadow-md transition-colors duration-300">
     <div class="flex items-center justify-between px-4 lg:px-20 py-3">
-        <div class="shrink-0">
-            <a href="/">
-                @if (config.Image != null)
+        <div class="shrink-0 flex items-center gap-3">
+            <a href="/" class="flex items-center gap-2">
+                @if (config?.Image != null)
                 {
-                    <img src="@Path.Combine("/images/configs/", config.Image)" alt="Logo" class="h-10">
+                    <img src="@Path.Combine("/images/configs/", config.Image)" alt="Logo" class="h-10 sm:h-12 object-contain">
+                }
+                else
+                {
+                    <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white font-black text-xl shadow-md">
+                        AT
+                    </div>
                 }
             </a>
         </div>
 
         <nav class="hidden lg:flex flex-1 justify-center gap-8 text-lg font-medium">
-            <a href="/" class="text-[14px] hover:text-orange-500 transition">Trang Chủ</a>
-            <a href="/" class="text-[14px] hover:text-orange-500 transition">Acc Mới Nhất</a>
-            <a href="@Url.Action("ProductList")" class="text-[14px] hover:text-orange-500 transition">Acc cho thuê</a>
-            <a href="@Url.Action("TinhGop")" class="text-[14px] hover:text-orange-500 transition">Tính trả góp</a>
-            <a href="@Url.Action("NapUc")" class="text-[14px] hover:text-orange-500 transition">Nạp UC</a>
+            <a href="/" class="nav-link text-[14px] font-semibold transition">Trang Chủ</a>
+            <a href="/" class="nav-link text-[14px] font-semibold transition">Acc Mới Nhất</a>
+            <a href="@Url.Action("ProductList")" class="nav-link text-[14px] font-semibold transition">Acc cho thuê</a>
+            <a href="@Url.Action("TinhGop")" class="nav-link text-[14px] font-semibold transition">Tính trả góp</a>
+            <a href="@Url.Action("NapUc")" class="nav-link text-[14px] font-semibold transition">Nạp UC</a>
         </nav>
 
         <div class="hidden lg:flex shrink-0 items-center gap-2 text-right">
             <div>
-                <div class="font-bold">@config.Title</div>
-                <div class="text-red-500 text-sm">Shop bán acc uy tín</div>
+                <div class="header-site-title font-extrabold text-base">@(config?.Title ?? "Shop Acc Anh Tài")</div>
+                <div class="header-site-subtitle text-xs font-semibold">Shop bán acc uy tín</div>
             </div>
         </div>
         <button class="lg:hidden hamburger" id="menuToggle" onclick="show()">
@@ -82,5 +88,3 @@
         </li>
     </ul>
 </div>
-<img src="~/Content/images/imgi_115_left-3.png" alt="Hoa" class="hoa-dao hoa-dao-left" />
-<img src="~/Content/images/imgi_116_right-3.png" alt="Hoa"  class="hoa-dao hoa-dao-right"  />

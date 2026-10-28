@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
   font-family: "Display-Bold";
   font-display: swap;
   src: url("../webfonts/SF-Pro-Display-Bold.woff2") format("woff2");
@@ -70,9 +70,9 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif !important;
+  font-family: "Be Vietnam Pro", "Montserrat", "Roboto", sans-serif !important;
   top: 0 !important;
-  background: #ffd8bb !important;
+  background: #f8fafc;
 }
 
 .container {
@@ -94,9 +94,13 @@ body {
   }
 }
 
-a, a:hover {
-  color: #004596;
-  color: #000;
+a {
+  color: #1e293b;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ea580c;
   text-decoration: none;
 }
 

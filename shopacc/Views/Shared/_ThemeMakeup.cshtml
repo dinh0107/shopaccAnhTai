@@ -1,0 +1,101 @@
+@using shopacc.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    var theme = config?.ThemeEvent?.ToLower() ?? "none";
+    var enableEffect = config?.EnableThemeEffect ?? false;
+    var greeting = config?.ThemeGreeting;
+
+    if (string.IsNullOrWhiteSpace(greeting))
+    {
+        if (theme == "tet")
+        {
+            greeting = "🧧 Chúc Mừng Năm Mới - Vạn Sự Như Ý - Tấn Tài Tấn Lộc! 🌸";
+        }
+        else if (theme == "christmas")
+        {
+            greeting = "🎄 Giáng Sinh An Lành - Merry Christmas & Happy New Year! 🎁";
+        }
+        else if (theme == "halloween")
+        {
+            greeting = "🎃 Happy Halloween - Săn Acc Siêu Cấp Cùng Lễ Hội Ma Quái! 🦇";
+        }
+        else if (theme == "summer")
+        {
+            greeting = "☀️ Chào Hè Rực Rỡ - Ưu Đãi Cực Bốc Dành Riêng Cho Bạn! 🌴";
+        }
+    }
+}
+
+@if (theme != "none")
+{
+    <!-- Topbar Event Greeting Banner -->
+    if (!string.IsNullOrWhiteSpace(greeting))
+    {
+        <div id="theme-event-topbar" class="theme-topbar theme-topbar-@theme">
+            <span class="theme-greeting-text">@greeting</span>
+            <button type="button" class="topbar-close" onclick="closeThemeTopbar()" title="Đóng thông báo">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    }
+
+    <!-- Corner / Side Festival Decorations -->
+    if (theme == "tet")
+    {
+        <img src="~/Content/images/imgi_115_left-3.png" alt="Hoa đào" class="hoa-dao-corner hoa-dao-left" />
+        <img src="~/Content/images/imgi_116_right-3.png" alt="Hoa đào" class="hoa-dao-corner hoa-dao-right" />
+        <img src="~/Content/images/themes/lantern.svg" alt="Đèn lồng Tết" class="tet-lantern-hang tet-lantern-left" />
+        <img src="~/Content/images/themes/lantern.svg" alt="Đèn lồng Tết" class="tet-lantern-hang tet-lantern-right" />
+    }
+    else if (theme == "christmas")
+    {
+        <div class="christmas-lights-garland">
+            @for (int i = 0; i < 28; i++)
+            {
+                <span class="christmas-bulb"></span>
+            }
+        </div>
+    }
+    else if (theme == "halloween")
+    {
+        <img src="~/Content/images/themes/spider-web.svg" alt="Mạng nhện" class="halloween-web-corner halloween-web-left" />
+        <img src="~/Content/images/themes/spider-web.svg" alt="Mạng nhện" class="halloween-web-corner halloween-web-right" />
+    }
+    else if (theme == "summer")
+    {
+        <img src="~/Content/images/themes/summer-sun.svg" alt="Nắng hè" class="summer-sun-corner" />
+    }
+
+    <!-- Dynamic Particle Animation -->
+    if (enableEffect)
+    {
+        <script src="~/Scripts/themes-effects.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof window.initThemeEffects === 'function') {
+                    window.initThemeEffects('@theme');
+                }
+            });
+        </script>
+    }
+
+    <script>
+        function closeThemeTopbar() {
+            var topbar = document.getElementById('theme-event-topbar');
+            if (topbar) {
+                topbar.style.display = 'none';
+                try {
+                    sessionStorage.setItem('theme_topbar_hidden', '1');
+                } catch(e) {}
+            }
+        }
+        (function() {
+            try {
+                if (sessionStorage.getItem('theme_topbar_hidden') === '1') {
+                    var el = document.getElementById('theme-event-topbar');
+                    if (el) el.style.display = 'none';
+                }
+            } catch(e) {}
+        })();
+    </script>
+}

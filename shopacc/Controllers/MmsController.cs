@@ -1,4 +1,4 @@
-﻿using shopacc.DAL;
+using shopacc.DAL;
 using shopacc.Models;
 using shopacc.ViewModel;
 using Helpers;
@@ -269,6 +269,9 @@ namespace shopacc.Controllers
                 config.Body = model.Body;
                 config.Name = model.Name;
                 config.Profile = model.Profile;
+                config.ThemeEvent = string.IsNullOrWhiteSpace(model.ThemeEvent) ? "none" : model.ThemeEvent;
+                config.EnableThemeEffect = model.EnableThemeEffect;
+                config.ThemeGreeting = model.ThemeGreeting;
                 if (model.Zalo != null)
                 {
                     config.Zalo = model.Zalo.Replace(" ", string.Empty);

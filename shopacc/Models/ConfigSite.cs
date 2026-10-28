@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace shopacc.Models
 {
@@ -45,5 +45,14 @@ namespace shopacc.Models
         public string Avatar { get; set; }
         [Display(Name = "Mô tả Profile"), UIHint("EditorBox")]
         public string Profile { get; set; }
+
+        [Display(Name = "Giao diện sự kiện"), StringLength(50)]
+        public string ThemeEvent { get; set; }
+
+        [Display(Name = "Bật hiệu ứng động sự kiện")]
+        public bool EnableThemeEffect { get; set; }
+
+        [Display(Name = "Lời chúc / Thông điệp sự kiện"), StringLength(200)]
+        public string ThemeGreeting { get; set; }
     }
 }

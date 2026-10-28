@@ -127,9 +127,200 @@
                             @Html.LabelFor(a => a.GoogleAnalytics, new { @class = "col-form-label col-lg-3" })
                             <div class="col-lg-9">@Html.EditorFor(a => a.GoogleAnalytics)</div>
                         </div>
+
+                        <!-- ================= THEME MAKEUP SETTINGS ================= -->
+                        <div class="my-4 pt-3 border-top">
+                            <h5 class="text-primary fw-bold mb-1">
+                                <i class="fa-solid fa-wand-magic-sparkles me-2 text-warning"></i>
+                                Giao diện Sự kiện & Lễ hội (Theme Makeup)
+                            </h5>
+                            <p class="text-muted small mb-3">
+                                Tùy chọn makeup giao diện website theo sự kiện (Mùa Hè, Halloween, Giáng Sinh, Tết). Phụ kiện trên avatar, góc trang trí và hiệu ứng chuyển động sẽ tự động kích hoạt!
+                            </p>
+
+                            <!-- Theme Cards Visual Selector -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4 col-lg-2">
+                                    <div class="theme-select-card @(string.IsNullOrEmpty(Model?.ThemeEvent) || Model.ThemeEvent == "none" ? "active" : "")" data-theme="none" onclick="selectTheme('none')">
+                                        <i class="fa-solid fa-circle-check badge-check"></i>
+                                        <div class="theme-card-icon">💻</div>
+                                        <div class="theme-card-title">Mặc định</div>
+                                        <div class="theme-card-desc">Giao diện chuẩn, tắt toàn bộ trang trí</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-2">
+                                    <div class="theme-select-card @(Model?.ThemeEvent == "summer" ? "active" : "")" data-theme="summer" onclick="selectTheme('summer')">
+                                        <i class="fa-solid fa-circle-check badge-check"></i>
+                                        <div class="theme-card-icon">☀️🌴</div>
+                                        <div class="theme-card-title text-info">Mùa Hè</div>
+                                        <div class="theme-card-desc">Biển xanh, nắng vàng, mũ cói & kính mát</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-2">
+                                    <div class="theme-select-card @(Model?.ThemeEvent == "halloween" ? "active" : "")" data-theme="halloween" onclick="selectTheme('halloween')">
+                                        <i class="fa-solid fa-circle-check badge-check"></i>
+                                        <div class="theme-card-icon">🎃🦇</div>
+                                        <div class="theme-card-title" style="color:#ea580c">Halloween</div>
+                                        <div class="theme-card-desc">Bí ngô ma mị, nón phù thủy, dơi bay</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <div class="theme-select-card @(Model?.ThemeEvent == "christmas" ? "active" : "")" data-theme="christmas" onclick="selectTheme('christmas')">
+                                        <i class="fa-solid fa-circle-check badge-check"></i>
+                                        <div class="theme-card-icon">🎄❄️</div>
+                                        <div class="theme-card-title text-danger">Giáng Sinh (Noel)</div>
+                                        <div class="theme-card-desc">Tuyết rơi, mũ Noel avatar, dây đèn 7 màu</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <div class="theme-select-card @(Model?.ThemeEvent == "tet" ? "active" : "")" data-theme="tet" onclick="selectTheme('tet')">
+                                        <i class="fa-solid fa-circle-check badge-check"></i>
+                                        <div class="theme-card-icon">🧧🌸</div>
+                                        <div class="theme-card-title text-danger">Tết Nguyên Đán</div>
+                                        <div class="theme-card-desc">Hoa đào/mai rơi, cành đào, đèn lồng & lì xì</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dropdown select fallback / binding -->
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3 fw-bold">Chọn sự kiện:</label>
+                                <div class="col-lg-9">
+                                    <select name="ThemeEvent" id="ThemeEvent" class="form-select form-control" onchange="onSelectThemeChange(this.value)">
+                                        <option value="none" @(string.IsNullOrEmpty(Model?.ThemeEvent) || Model.ThemeEvent == "none" ? "selected" : "")>🚫 Không áp dụng (Giao diện Mặc định)</option>
+                                        <option value="summer" @(Model?.ThemeEvent == "summer" ? "selected" : "")>☀️ Mùa Hè rực rỡ (Summer Vibes)</option>
+                                        <option value="halloween" @(Model?.ThemeEvent == "halloween" ? "selected" : "")>🎃 Lễ hội Ma quái (Halloween)</option>
+                                        <option value="christmas" @(Model?.ThemeEvent == "christmas" ? "selected" : "")>🎄 Giáng Sinh an lành (Christmas / Noel)</option>
+                                        <option value="tet" @(Model?.ThemeEvent == "tet" ? "selected" : "")>🧧 Tết Nguyên Đán (Lunar New Year)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Animation Effect -->
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3 fw-bold">Hiệu ứng động:</label>
+                                <div class="col-lg-9 d-flex align-items-center">
+                                    <div class="form-check form-switch fs-6">
+                                        <input class="form-check-input" type="checkbox" name="EnableThemeEffect" id="EnableThemeEffect" value="true" @(Model?.EnableThemeEffect ?? true ? "checked" : "") />
+                                        <input type="hidden" name="EnableThemeEffect" value="false" />
+                                        <label class="form-check-label ms-2" for="EnableThemeEffect">
+                                            <strong>Bật hiệu ứng rơi/bay</strong> (Tuyết rơi, hoa đào rơi, dơi bay, bong bóng nước)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Festival Topbar Greeting Banner -->
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3 fw-bold">Thông điệp / Lời chúc sự kiện:</label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="ThemeGreeting" id="ThemeGreeting" class="form-control" value="@Model.ThemeGreeting" placeholder="Ví dụ: 🧧 Chúc Mừng Năm Mới 2026 - Vạn Sự Như Ý!" maxlength="200" />
+                                    <div class="mt-2">
+                                        <span class="text-muted small me-2">Gợi ý nhanh:</span>
+                                        <span class="btn-preset-greeting" onclick="setGreeting('🧧 Chúc Mừng Năm Mới - Vạn Sự Như Ý - Tấn Tài Tấn Lộc! 🌸')">🌸 Lời chúc Tết</span>
+                                        <span class="btn-preset-greeting" onclick="setGreeting('🎄 Giáng Sinh An Lành - Merry Christmas & Happy New Year! 🎁')">🎄 Lời chúc Noel</span>
+                                        <span class="btn-preset-greeting" onclick="setGreeting('🎃 Happy Halloween - Săn Acc Siêu Cấp Cùng Lễ Hội Ma Quái! 🦇')">🎃 Lời chúc Halloween</span>
+                                        <span class="btn-preset-greeting" onclick="setGreeting('☀️ Chào Hè Rực Rỡ - Ưu Đãi Cực Bốc Dành Riêng Cho Bạn! 🌴')">☀️ Lời chúc Mùa Hè</span>
+                                    </div>
+                                    <small class="text-muted d-block mt-1">Thông điệp này sẽ xuất hiện trên thanh thông báo nổi bật đầu website.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <style>
+                            .theme-select-card {
+                                border: 2px solid #e2e8f0;
+                                border-radius: 12px;
+                                padding: 14px 10px;
+                                cursor: pointer;
+                                transition: all 0.25s ease;
+                                background: #ffffff;
+                                text-align: center;
+                                position: relative;
+                                height: 100%;
+                            }
+                            .theme-select-card:hover {
+                                transform: translateY(-3px);
+                                box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+                                border-color: #93c5fd;
+                            }
+                            .theme-select-card.active {
+                                border-color: #2563eb;
+                                background: #eff6ff;
+                                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+                            }
+                            .theme-select-card .badge-check {
+                                position: absolute;
+                                top: 8px;
+                                right: 8px;
+                                display: none;
+                                color: #2563eb;
+                                font-size: 16px;
+                            }
+                            .theme-select-card.active .badge-check {
+                                display: block;
+                            }
+                            .theme-card-icon {
+                                font-size: 26px;
+                                margin-bottom: 6px;
+                            }
+                            .theme-card-title {
+                                font-weight: 700;
+                                font-size: 13px;
+                                margin-bottom: 4px;
+                            }
+                            .theme-card-desc {
+                                font-size: 11px;
+                                color: #64748b;
+                                line-height: 1.3;
+                            }
+                            .btn-preset-greeting {
+                                font-size: 12px;
+                                padding: 4px 10px;
+                                border-radius: 20px;
+                                background: #f1f5f9;
+                                color: #334155;
+                                border: 1px solid #cbd5e1;
+                                cursor: pointer;
+                                transition: all 0.2s;
+                                margin-right: 6px;
+                                margin-bottom: 6px;
+                                display: inline-block;
+                            }
+                            .btn-preset-greeting:hover {
+                                background: #e2e8f0;
+                                color: #0f172a;
+                            }
+                        </style>
+
+                        <script>
+                            function selectTheme(val) {
+                                var select = document.getElementById('ThemeEvent');
+                                if (select) {
+                                    select.value = val;
+                                }
+                                document.querySelectorAll('.theme-select-card').forEach(function(card) {
+                                    if (card.getAttribute('data-theme') === val) {
+                                        card.classList.add('active');
+                                    } else {
+                                        card.classList.remove('active');
+                                    }
+                                });
+                            }
+                            function onSelectThemeChange(val) {
+                                selectTheme(val);
+                            }
+                            function setGreeting(text) {
+                                var input = document.getElementById('ThemeGreeting');
+                                if (input) {
+                                    input.value = text;
+                                }
+                            }
+                        </script>
+
                         <div class="btn-group">
                             <button type="submit" class="btn-main btn-primary text-white ms-3">
-                                <span>Lưu</span>
+                                <span>Lưu cấu hình</span>
                                 <i class="fa-solid fa-floppy-disk ms-2"></i>
                             </button>
                         </div>

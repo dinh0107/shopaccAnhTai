@@ -1,9 +1,9 @@
-﻿@model shopacc.ViewModel.HomeViewModel
+@model shopacc.ViewModel.HomeViewModel
 @using shopacc.Models
 @{
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
-    ViewBag.Title = config.Title;
-    ViewBag.Description = config.Description;
+    ViewBag.Title = config?.Title ?? "Shop Acc";
+    ViewBag.Description = config?.Description ?? "Shop bán acc uy tín";
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index", "Home");
     var fb = Model.Banners.FirstOrDefault();
     if (fb != null)
@@ -11,57 +11,109 @@
         ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
     }
 }
-<div class="flex items-center justify-center px-2 sm:px-8 lg:px-20 py-4 bg-[#ffd8bb]">
-    <div class="w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
-        <div class="relative h-[160px] sm:h-[300px] lg:h-[400px] overflow-hidden">
-            <div class="slider-container h-full banner-desk">
-                <div class="autoplay h-full">
-                    @foreach (var item in Model.Banners)
-                    {
-                        if (item.Image != null)
-                        {
-                            <div class="slide active h-full">
-                                <img src="@Path.Combine("/images/banners/", item.Image)"
-                                     alt="@item.BannerName"
-                                     class="w-full h-full object-cover">
-                            </div>
-                        }
-                    }
+@{
+    var activeTheme = config?.ThemeEvent?.ToLower() ?? "default";
+}
+<div class="flex items-center justify-center px-2 sm:px-8 lg:px-20 py-4 banner-theme-bg">
+    <div class="w-full hero-card-wrapper rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+        <div class="relative h-[200px] sm:h-[340px] lg:h-[420px] overflow-hidden">
+            @if (activeTheme == "christmas")
+            {
+                <div class="theme-hero-art h-full relative">
+                    <img src="~/Content/images/themes/christmas-hero.jpg" alt="Mừng Giáng Sinh" class="w-full h-full object-cover object-center" />
+                    <div class="hero-overlay-gradient"></div>
+                    <div class="hero-event-ribbon christmas-ribbon">
+                        <i class="fa-solid fa-snowflake"></i> LỄ HỘI GIÁNG SINH - ƯU ĐÃI ĐẾN 50% <i class="fa-solid fa-gift"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="h-full banner-mb">
-                <div class="autoplay h-full">
-                    @foreach (var item in Model.Banners)
-                    {
-                        if (item.Image2 != null)
-                        {
-                            <div class="slide active h-full">
-                                <img src="@Path.Combine("/images/banners/", item.Image2)"
-                                     alt="@item.BannerName"
-                                     class="w-full h-full object-cover">
-                            </div>
-                        }
-                    }
+            }
+            else if (activeTheme == "halloween")
+            {
+                <div class="theme-hero-art h-full relative">
+                    <img src="~/Content/images/themes/halloween-hero.jpg" alt="Đêm Hội Halloween" class="w-full h-full object-cover object-center" />
+                    <div class="hero-overlay-gradient"></div>
+                    <div class="hero-event-ribbon halloween-ribbon">
+                        <i class="fa-solid fa-ghost"></i> HALLOWEEN SALE - SĂN ACC VIP GIÁ HỦY DIỆT <i class="fa-solid fa-skull"></i>
+                    </div>
                 </div>
-            </div>
+            }
+            else if (Model.Banners.Any())
+            {
+                <div class="slider-container h-full banner-desk">
+                    <div class="autoplay h-full">
+                        @foreach (var item in Model.Banners)
+                        {
+                            if (item.Image != null)
+                            {
+                                <div class="slide active h-full">
+                                    <img src="@Path.Combine("/images/banners/", item.Image)"
+                                         alt="@item.BannerName"
+                                         class="w-full h-full object-cover">
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="h-full banner-mb">
+                    <div class="autoplay h-full">
+                        @foreach (var item in Model.Banners)
+                        {
+                            if (item.Image2 != null)
+                            {
+                                <div class="slide active h-full">
+                                    <img src="@Path.Combine("/images/banners/", item.Image2)"
+                                         alt="@item.BannerName"
+                                         class="w-full h-full object-cover">
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="default-hero-art h-full flex items-center justify-center bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900">
+                    <div class="text-center text-white p-4">
+                        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-wide">@(config?.Title ?? "SHOP ACC ANH TÀI")</h2>
+                        <p class="text-sm sm:text-base text-slate-300 mt-2">Hệ thống mua bán & cho thuê acc game uy tín hàng đầu</p>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="relative -mt-20 sm:-mt-24 lg:-mt-30 px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8">
             <div class="flex flex-col items-center text-center">
 
-                <div class="w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] lg:w-[200px] lg:h-[200px]
-                            rounded-full border-4 sm:border-6 lg:border-8 border-white
-                            shadow-2xl bg-gray-200 mb-4 avatar noel">
-                    @*<img src="~/Content/images/santa-cap.png" alt="cap" class="cap">*@
-                    @if (config.Avatar != null)
+                <div class="avatar-theme-wrapper mb-4">
+                    <div class="w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] lg:w-[200px] lg:h-[200px]
+                                rounded-full border-4 sm:border-6 lg:border-8 border-white
+                                shadow-2xl bg-gray-200 avatar-frame overflow-hidden">
+                        @if (config?.Avatar != null)
+                        {
+                            <img src="@Path.Combine("/images/configs/", config.Avatar)"
+                                 alt="Profile"
+                                 class="w-full h-full object-cover img-avt">
+                        }
+                    </div>
+                    @if (activeTheme == "christmas")
                     {
-                        <img src="@Path.Combine("/images/configs/", config.Avatar)"
-                             alt="Profile"
-                             class="w-full h-full object-cover img-avt">
+                        <img src="~/Content/images/santa-cap.png" alt="Santa Hat" class="theme-hat santa-hat-accessory" />
+                    }
+                    else if (activeTheme == "halloween")
+                    {
+                        <img src="~/Content/images/themes/witch-hat.svg" alt="Witch Hat" class="theme-hat witch-hat-accessory" />
+                    }
+                    else if (activeTheme == "tet")
+                    {
+                        <img src="~/Content/images/themes/tet-accessory.svg" alt="Tết" class="theme-hat tet-hat-accessory" />
+                    }
+                    else if (activeTheme == "summer")
+                    {
+                        <img src="~/Content/images/themes/summer-accessory.svg" alt="Summer" class="theme-hat summer-hat-accessory" />
                     }
                 </div>
                 <div class="flex items-center justify-center gap-2 mb-2">
-                    <div class="text-lg sm:text-[18px] lg:text-2xl font-bold text-gray-800">
+                    <div class="avatar-name text-lg sm:text-[18px] lg:text-2xl font-extrabold">
                         @config.Name
                     </div>
                     <div class="verified-badge">
@@ -71,7 +123,7 @@
                     </div>
                 </div>
 
-                <div class="body-html text-sm sm:text-base max-w-3xl">
+                <div class="avatar-profile body-html text-sm sm:text-base max-w-3xl">
                     @Html.Raw(config.Profile)
                 </div>
             </div>
@@ -81,41 +133,41 @@
 
 
 <section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
-    <div class="p-4 sm:p-6 mb-6">
+    <div class="product-card-container bg-white/95 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-8 mb-6 border border-slate-100">
         <div class="mb-6">
-            <h1 class="text-2xl font-bold text-gray-900 mb-1" style="font-weight:700">Sản phẩm nổi bật</h1>
-            <p class="text-sm text-gray-500">Shop acc game tốt nhất dành cho bạn</p>
+            <h1 class="section-title text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">Sản phẩm nổi bật</h1>
+            <p class="section-subtitle text-sm sm:text-base text-slate-600 font-medium">Shop acc game tốt nhất dành cho bạn</p>
         </div>
-        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center mb-6">
             <div class="flex flex-wrap gap-2 flex-1">
-                <div class="filter-btn active px-4 py-2 text-sm rounded-full border-2 border-orange-500 font-medium" data-filter="all">
+                <div class="filter-btn active px-4 py-2 text-sm rounded-full font-semibold" data-filter="all">
                     Tất cả
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="under-1m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="under-1m">
                     Dưới 1m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="1m-5m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="1m-5m">
                     1m - 5m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="5m-10m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="5m-10m">
                     5m - 10m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="10m-15m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="10m-15m">
                     10m - 15m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="15m-20m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="15m-20m">
                     15m - 20m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="20m-50m">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="20m-50m">
                     20m - 50m
                 </div>
-                <div class="filter-btn px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-600 font-medium" data-filter="50m+">
+                <div class="filter-btn px-4 py-2 text-sm rounded-full font-semibold" data-filter="50m+">
                     50m+
                 </div>
             </div>
 
             <div class="lg:w-56">
-                <select class="w-full px-4 py-2 text-sm border-2 border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 text-gray-600 font-medium cursor-pointer bg-white">
+                <select class="sort-select w-full px-4 py-2 text-sm border-2 border-slate-200 rounded-lg focus:outline-none focus:border-orange-500 text-slate-700 font-semibold cursor-pointer bg-white">
                     <option value="newest">Sản phẩm mới nhất</option>
                     <option value="oldest">Sản phẩm cũ nhất</option>
                     <option value="price-low">Giá thấp đến cao</option>
@@ -123,9 +175,10 @@
                 </select>
             </div>
         </div>
-    </div>
-    <div id="sort">
-        @Html.Action("ProductSort")
+
+        <div id="sort">
+            @Html.Action("ProductSort")
+        </div>
     </div>
 </section>
 
@@ -212,12 +265,10 @@
         // Xử lý click vào nút lọc giá
         $('.filter-btn').on('click', function() {
             // Remove active class từ tất cả buttons
-            $('.filter-btn').removeClass('active border-orange-500 text-orange-500')
-                           .addClass('border-gray-200 text-gray-600');
+            $('.filter-btn').removeClass('active');
 
             // Add active class cho button được click
-            $(this).addClass('active border-orange-500 text-orange-500')
-                   .removeClass('border-gray-200 text-gray-600');
+            $(this).addClass('active');
 
             // Lấy giá trị filter
             currentPrice = $(this).data('filter');

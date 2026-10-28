@@ -1,4 +1,4 @@
-﻿@model shopacc.ViewModel.NapUcViewModel
+@model shopacc.ViewModel.NapUcViewModel
 @using shopacc.Models
 @using System.Globalization
 
@@ -8,75 +8,68 @@
     var culture = new CultureInfo("vi-VN");
 }
 
-<div class="bg-[#FDF6F1] px-4 sm:px-8 lg:px-20 py-4 sm:py-5">
-    <nav class="flex" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 p-0">
-            <li class="inline-flex items-center">
-                <a href="/" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">
-                    Trang chủ
-                </a>
-            </li>
-            <li>
-                <div class="flex items-center space-x-1.5">
-                    <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
-                    <a href="#" class="inline-flex items-center text-sm font-medium text-body hover:text-fg-brand">Nạp Uc</a>
-                </div>
-            </li>
-        </ol>
+<div class="breadcrumb-container px-4 sm:px-8 lg:px-20 py-3.5 mb-2">
+    <nav class="flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="text-slate-600 hover:text-orange-500 font-medium">Trang chủ</a>
+        <span class="text-slate-400">/</span>
+        <strong class="text-slate-900 font-bold">Bảng Giá Nạp UC</strong>
     </nav>
-    <strong>Bảng Giá Nạp UC</strong>
 </div>
-<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
-    <strong>BẢNG GIÁ NẠP UC VNG</strong>
-    <table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" class="table table-bordered text-center mt-3">
-        <colgroup>
-            <col width="100">
-            <col width="100">
-            <col width="100">
-            <col width="100">
-        </colgroup>
-        <tbody>
-            <tr>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Price (USDT)&quot;}"><strong>Giá</strong></td>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;1st&quot;}"><strong>Nạp Lần 1</strong></td>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;2nd&quot;}"><strong>Nạp Lần 2</strong></td>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;3rd&quot;}"><strong>Nạp Lần 3+</strong></td>
-            </tr>
-            @foreach (var item in Model.Tables)
-            {
-                <tr>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:45413}" data-sheets-numberformat="{&quot;1&quot;:5,&quot;2&quot;:&quot;d.m&quot;,&quot;3&quot;:1}">@item.Price</td>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:88}">@item.Lan1</td>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:82}">@item.Lan2</td>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:68}">@item.Lan3</td>
-                </tr>
-            }
 
-        </tbody>
-    </table>
-</section>
-<section class="px-4 sm:px-8 lg:px-20 pt-6 sm:pt-8 lg:pt-10">
-    <strong>BẢNG GIÁ NẠP UC QUỐC TẾ</strong>
-    <table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" class="table table-bordered text-center mt-3">
-        <colgroup>
-            <col width="100">
-            <col width="100">
-            <col width="100">
-            <col width="100">
-        </colgroup>
-        <tbody>
-            <tr>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Price (USDT)&quot;}"><strong>Giá</strong></td>
-                <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;1st&quot;}"><strong>UC</strong></td>
-            </tr>
-            @foreach (var item in Model.TablesQT)
-            {
-                <tr>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:45413}" data-sheets-numberformat="{&quot;1&quot;:5,&quot;2&quot;:&quot;d.m&quot;,&quot;3&quot;:1}">@item.Price</td>
-                    <td data-sheets-value="{&quot;1&quot;:3,&quot;3&quot;:88}">@item.Lan1</td>
-                </tr>
-            }
+<section class="px-4 sm:px-8 lg:px-20 pt-4 sm:pt-6 lg:pt-8">
+    <div class="product-card-container bg-white/95 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-8 mb-6 border border-slate-100">
+        <h2 class="section-title text-xl sm:text-2xl font-extrabold text-slate-900 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-500"></i>
+            BẢNG GIÁ NẠP UC VNG
+        </h2>
+        <div class="overflow-x-auto">
+            <table class="theme-table text-center">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-4 font-bold">Giá</th>
+                        <th class="py-3 px-4 font-bold">Nạp Lần 1</th>
+                        <th class="py-3 px-4 font-bold">Nạp Lần 2</th>
+                        <th class="py-3 px-4 font-bold">Nạp Lần 3+</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Tables)
+                    {
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="font-semibold text-slate-800 py-3 px-4">@item.Price</td>
+                            <td class="text-emerald-700 font-bold py-3 px-4">@item.Lan1</td>
+                            <td class="text-emerald-700 font-bold py-3 px-4">@item.Lan2</td>
+                            <td class="text-emerald-700 font-bold py-3 px-4">@item.Lan3</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        </tbody>
-    </table>
+    <div class="product-card-container bg-white/95 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-8 mb-6 border border-slate-100">
+        <h2 class="section-title text-xl sm:text-2xl font-extrabold text-slate-900 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-globe text-blue-500"></i>
+            BẢNG GIÁ NẠP UC QUỐC TẾ
+        </h2>
+        <div class="overflow-x-auto">
+            <table class="theme-table text-center">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-4 font-bold">Giá</th>
+                        <th class="py-3 px-4 font-bold">UC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TablesQT)
+                    {
+                        <tr class="hover:bg-blue-50/50 transition">
+                            <td class="font-semibold text-slate-800 py-3 px-4">@item.Price</td>
+                            <td class="text-blue-700 font-bold py-3 px-4">@item.Lan1</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>

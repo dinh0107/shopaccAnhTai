@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>shopacc</RootNamespace>
     <AssemblyName>shopacc</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -181,6 +181,10 @@
     <Compile Include="Migrations\202512151451501_ads.Designer.cs">
       <DependentUpon>202512151451501_ads.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202610280349506_add-configs.cs" />
+    <Compile Include="Migrations\202610280349506_add-configs.Designer.cs">
+      <DependentUpon>202610280349506_add-configs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Banner.cs" />
@@ -203,6 +207,17 @@
       <DependentUpon>adminSite.css</DependentUpon>
     </Content>
     <Content Include="Content\all.css" />
+    <Content Include="Content\themes-makeup.css" />
+    <Content Include="Scripts\themes-effects.js" />
+    <Content Include="Views\Shared\_ThemeMakeup.cshtml" />
+    <Content Include="Content\images\themes\witch-hat.svg" />
+    <Content Include="Content\images\themes\pumpkin.svg" />
+    <Content Include="Content\images\themes\spider-web.svg" />
+    <Content Include="Content\images\themes\summer-accessory.svg" />
+    <Content Include="Content\images\themes\summer-sun.svg" />
+    <Content Include="Content\images\themes\tet-accessory.svg" />
+    <Content Include="Content\images\themes\lantern.svg" />
+    <Content Include="Content\images\themes\christmas-tree.svg" />
     <Content Include="Content\aos.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -886,6 +901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512151451501_ads.resx">
       <DependentUpon>202512151451501_ads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202610280349506_add-configs.resx">
+      <DependentUpon>202610280349506_add-configs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,1126 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Montserrat:wght@600;700;800;900&display=swap');
+
+/* ==========================================================================
+   GLOBAL VIETNAMESE TYPOGRAPHY
+   ========================================================================== */
+html, body, button, input, select, textarea {
+    font-family: 'Be Vietnam Pro', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.hero-event-ribbon,
+.avatar-name,
+.header-site-title {
+    font-family: 'Montserrat', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+    letter-spacing: 0 !important;
+}
+
+/* ==========================================================================
+   THEME MAKEUP SYSTEM - SHOPACC
+   Themes: Default (none), Summer (hè), Halloween, Christmas (noel), Tet (lunar new year)
+   ========================================================================== */
+
+/* ---------- 1. Body & Atmosphere Backgrounds ---------- */
+body.theme-default {
+    background-color: #f8fafc !important;
+    color: #0f172a;
+}
+
+body.theme-tet {
+    background: radial-gradient(circle at 50% 0%, #fff1e6 0%, #ffd8bb 60%, #fed7aa 100%) !important;
+    background-attachment: fixed !important;
+    color: #1e293b;
+}
+
+body.theme-summer {
+    background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 50%, #fef3c7 100%) !important;
+    background-attachment: fixed !important;
+    color: #0f172a;
+}
+
+/* Noel / Christmas: Deep midnight winter sapphire with aurora borealis ambient */
+body.theme-christmas {
+    background: radial-gradient(ellipse at 50% 0%, #15325b 0%, #0c1f38 40%, #050e1a 100%) !important;
+    background-attachment: fixed !important;
+    color: #e2e8f0;
+}
+
+/* Halloween: Dark fantasy gothic night with purple and fiery amber ambient */
+body.theme-halloween {
+    background: radial-gradient(ellipse at 50% 0%, #2e0f49 0%, #170728 40%, #07020d 100%) !important;
+    background-attachment: fixed !important;
+    color: #f1f5f9;
+}
+
+/* Banner container background adaptivity */
+.banner-theme-bg {
+    transition: background 0.3s ease;
+}
+.theme-tet .banner-theme-bg {
+    background-color: transparent;
+}
+.theme-summer .banner-theme-bg {
+    background: transparent;
+}
+.theme-halloween .banner-theme-bg {
+    background: transparent;
+}
+.theme-christmas .banner-theme-bg {
+    background: transparent;
+}
+.theme-default .banner-theme-bg {
+    background-color: transparent;
+}
+
+/* ---------- 2. Topbar Event Greeting Banner ---------- */
+.theme-topbar {
+    position: relative;
+    z-index: 100;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    animation: topbarSlideDown 0.5s ease-out;
+}
+
+@keyframes topbarSlideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.theme-topbar-tet {
+    background: linear-gradient(90deg, #b91c1c 0%, #dc2626 35%, #eab308 50%, #dc2626 65%, #b91c1c 100%);
+    color: #ffffff;
+    border-bottom: 2px solid #facc15;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.theme-topbar-summer {
+    background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 40%, #f59e0b 60%, #0284c7 100%);
+    color: #ffffff;
+    border-bottom: 2px solid #fde047;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.theme-topbar-halloween {
+    background: linear-gradient(90deg, #3b0764 0%, #6b21a8 30%, #ea580c 50%, #6b21a8 70%, #3b0764 100%);
+    color: #ffedd5;
+    border-bottom: 2px solid #ea580c;
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.45);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+
+.theme-topbar-christmas {
+    background: linear-gradient(90deg, #991b1b 0%, #dc2626 25%, #ef4444 50%, #dc2626 75%, #991b1b 100%);
+    color: #ffffff;
+    border-bottom: 2px solid #facc15;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.5);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.theme-topbar .topbar-close {
+    background: rgba(255,255,255,0.25);
+    border: none;
+    color: inherit;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-left: 8px;
+    transition: background 0.2s, transform 0.2s;
+}
+.theme-topbar .topbar-close:hover {
+    background: rgba(255,255,255,0.45);
+    transform: scale(1.1);
+}
+
+/* ---------- 3. Header Theme Integration ---------- */
+header.site-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+header.site-header .nav-link {
+    color: #1e293b;
+    font-weight: 600;
+}
+header.site-header .nav-link:hover {
+    color: #ea580c;
+}
+header.site-header .header-site-title {
+    color: #0f172a;
+}
+header.site-header .header-site-subtitle {
+    color: #ef4444;
+}
+
+/* Noel Header */
+.theme-christmas header.site-header {
+    background: rgba(8, 20, 36, 0.94) !important;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(147, 197, 253, 0.25) !important;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.4) !important;
+}
+.theme-christmas header.site-header .nav-link {
+    color: #e0f2fe !important;
+}
+.theme-christmas header.site-header .nav-link:hover {
+    color: #facc15 !important;
+    text-shadow: 0 0 12px rgba(250, 204, 21, 0.6);
+}
+.theme-christmas header.site-header .header-site-title {
+    color: #ffffff !important;
+}
+.theme-christmas header.site-header .header-site-subtitle {
+    color: #38bdf8 !important;
+}
+
+/* Halloween Header */
+.theme-halloween header.site-header {
+    background: rgba(14, 7, 24, 0.94) !important;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.35) !important;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.5) !important;
+}
+.theme-halloween header.site-header .nav-link {
+    color: #f3e8ff !important;
+}
+.theme-halloween header.site-header .nav-link:hover {
+    color: #fb923c !important;
+    text-shadow: 0 0 12px rgba(251, 146, 60, 0.7);
+}
+.theme-halloween header.site-header .header-site-title {
+    color: #ffffff !important;
+}
+.theme-halloween header.site-header .header-site-subtitle {
+    color: #fb923c !important;
+}
+
+/* ---------- 4. Christmas Fairy Lights Festoon ---------- */
+.christmas-lights-garland {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    z-index: 90;
+    background: rgba(4, 13, 24, 0.85);
+    border-bottom: 1px solid rgba(250, 204, 21, 0.3);
+    pointer-events: none;
+    padding: 0 10px;
+}
+.christmas-bulb {
+    width: 9px;
+    height: 13px;
+    border-radius: 50% 50% 45% 45%;
+    display: inline-block;
+    position: relative;
+    animation: bulbTwinkle 1.8s ease-in-out infinite alternate;
+}
+.christmas-bulb:nth-child(4n+1) { color: #facc15; background: #fef08a; box-shadow: 0 0 10px #facc15; animation-delay: 0s; }
+.christmas-bulb:nth-child(4n+2) { color: #ef4444; background: #f87171; box-shadow: 0 0 10px #ef4444; animation-delay: 0.45s; }
+.christmas-bulb:nth-child(4n+3) { color: #22c55e; background: #4ade80; box-shadow: 0 0 10px #22c55e; animation-delay: 0.9s; }
+.christmas-bulb:nth-child(4n)   { color: #38bdf8; background: #7dd3fc; box-shadow: 0 0 10px #38bdf8; animation-delay: 1.35s; }
+
+@keyframes bulbTwinkle {
+    0% { opacity: 0.4; filter: brightness(0.7); transform: scale(0.9); }
+    100% { opacity: 1; filter: brightness(1.3); transform: scale(1.1); }
+}
+
+/* ---------- 5. Hero Card & Theme Artwork Overlay ---------- */
+.hero-card-wrapper {
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+.hero-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.65) 100%);
+    pointer-events: none;
+}
+.hero-event-ribbon {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    animation: ribbonFloat 3s ease-in-out infinite alternate;
+}
+@keyframes ribbonFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+.christmas-ribbon {
+    background: rgba(185, 28, 28, 0.88);
+    color: #ffffff;
+    border: 1.5px solid #facc15;
+    box-shadow: 0 4px 15px rgba(185, 28, 28, 0.5), 0 0 12px rgba(250, 204, 21, 0.4);
+}
+.halloween-ribbon {
+    background: rgba(234, 88, 12, 0.88);
+    color: #ffffff;
+    border: 1.5px solid #a855f7;
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.5), 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+/* Theme Hero Container Styling */
+.theme-christmas .hero-card-wrapper {
+    background: rgba(10, 25, 45, 0.9) !important;
+    border: 1px solid rgba(147, 197, 253, 0.3) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.15) !important;
+}
+.theme-halloween .hero-card-wrapper {
+    background: rgba(20, 10, 34, 0.9) !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.25) !important;
+}
+
+/* Avatar Frame Theme Accents */
+.avatar-frame {
+    transition: all 0.3s ease;
+}
+.theme-christmas .avatar-frame {
+    border-color: #facc15 !important;
+    box-shadow: 0 0 30px rgba(234, 179, 8, 0.5), 0 0 50px rgba(56, 189, 248, 0.3) !important;
+}
+.theme-halloween .avatar-frame {
+    border-color: #ea580c !important;
+    box-shadow: 0 0 30px rgba(234, 88, 12, 0.5), 0 0 50px rgba(168, 85, 247, 0.4) !important;
+}
+
+/* Avatar Name & Profile Text */
+.avatar-name {
+    color: #0f172a;
+    transition: color 0.3s ease;
+}
+.avatar-profile {
+    color: #475569;
+}
+.theme-christmas .avatar-name {
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.theme-christmas .avatar-profile,
+.theme-christmas .avatar-profile * {
+    color: #cbd5e1 !important;
+}
+.theme-halloween .avatar-name {
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+.theme-halloween .avatar-profile,
+.theme-halloween .avatar-profile * {
+    color: #e9d5ff !important;
+}
+
+/* ---------- 6. Avatar Accessories Sizing & Positioning ---------- */
+.avatar-theme-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.theme-hat {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+/* Santa Hat (Giáng Sinh) */
+.santa-hat-accessory {
+    width: 140px;
+    height: 140px;
+    top: -55px;
+    right: 5px;
+    transform: rotate(8deg);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4)) drop-shadow(0 0 10px rgba(250, 204, 21, 0.3));
+    animation: santaSway 3s ease-in-out infinite alternate;
+}
+@keyframes santaSway {
+    0% { transform: rotate(5deg) translateY(0); }
+    100% { transform: rotate(11deg) translateY(-4px); }
+}
+
+/* Witch Hat (Halloween) */
+.witch-hat-accessory {
+    width: 145px;
+    height: 145px;
+    top: -65px;
+    right: 5px;
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.6));
+    animation: witchHover 2.5s ease-in-out infinite alternate;
+}
+@keyframes witchHover {
+    0% { transform: rotate(-5deg) translateY(0); }
+    100% { transform: rotate(0deg) translateY(-5px); }
+}
+
+/* Tet Blossom & Li Xi (Tết) */
+.tet-hat-accessory {
+    width: 120px;
+    height: 120px;
+    top: -45px;
+    right: 5px;
+    animation: tetGentleSway 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+@keyframes tetGentleSway {
+    0% { transform: rotate(-4deg); }
+    100% { transform: rotate(4deg); }
+}
+
+/* Summer Straw Hat & Sunglasses (Mùa Hè) */
+.summer-hat-accessory {
+    width: 135px;
+    height: 135px;
+    top: -52px;
+    right: 8px;
+    animation: summerBob 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+@keyframes summerBob {
+    0% { transform: rotate(-3deg) translateY(0); }
+    100% { transform: rotate(2deg) translateY(-4px); }
+}
+
+/* Mobile responsive accessories */
+@media (max-width: 640px) {
+    .santa-hat-accessory {
+        width: 100px;
+        height: 100px;
+        top: -40px;
+        right: 2px;
+    }
+    .witch-hat-accessory {
+        width: 105px;
+        height: 105px;
+        top: -48px;
+        right: 2px;
+    }
+    .tet-hat-accessory {
+        width: 90px;
+        height: 90px;
+        top: -35px;
+        right: 2px;
+    }
+    .summer-hat-accessory {
+        width: 95px;
+        height: 95px;
+        top: -38px;
+        right: 2px;
+    }
+}
+
+/* ---------- 7. Corner Decorations ---------- */
+/* Tet Peach Blossoms (2 bên) */
+.hoa-dao-corner {
+    position: fixed;
+    top: 0;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    z-index: 80;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+.hoa-dao-corner.hoa-dao-left { left: 0; }
+.hoa-dao-corner.hoa-dao-right { right: 0; }
+@media (max-width: 600px) {
+    .hoa-dao-corner { width: 85px; }
+}
+
+/* Tet Lanterns hanging */
+.tet-lantern-hang {
+    position: fixed;
+    top: 50px;
+    z-index: 79;
+    width: 65px;
+    height: auto;
+    pointer-events: none;
+    animation: lanternSwing 3.5s ease-in-out infinite alternate;
+    transform-origin: top center;
+}
+.tet-lantern-left { left: 15px; animation-delay: 0s; }
+.tet-lantern-right { right: 15px; animation-delay: 0.8s; }
+@keyframes lanternSwing {
+    0% { transform: rotate(-6deg); }
+    100% { transform: rotate(6deg); }
+}
+
+/* Halloween Spider Webs */
+.halloween-web-corner {
+    position: fixed;
+    top: 0;
+    z-index: 80;
+    width: 130px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0.85;
+}
+.halloween-web-left { left: 0; }
+.halloween-web-right { right: 0; transform: scaleX(-1); }
+@media (max-width: 600px) {
+    .halloween-web-corner { width: 75px; }
+}
+
+/* Summer Sun */
+.summer-sun-corner {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 80;
+    width: 75px;
+    height: auto;
+    pointer-events: none;
+    animation: sunRotate 12s linear infinite;
+    filter: drop-shadow(0 4px 8px rgba(245,158,11,0.3));
+}
+@keyframes sunRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- 8. Particle Effects Canvas ---------- */
+#theme-particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ---------- 8.5 Header Navigation & Brand ---------- */
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+.site-header .nav-link {
+    color: #1e293b;
+    transition: color 0.2s ease;
+}
+.site-header .nav-link:hover {
+    color: #ea580c;
+}
+.site-header .header-site-title {
+    color: #0f172a;
+}
+.site-header .header-site-subtitle {
+    color: #64748b;
+}
+
+/* Noel Header */
+.theme-christmas .site-header {
+    background: rgba(8, 20, 38, 0.96) !important;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.25) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
+}
+.theme-christmas .site-header .nav-link {
+    color: #f8fafc !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.theme-christmas .site-header .nav-link:hover {
+    color: #38bdf8 !important;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+}
+.theme-christmas .site-header .header-site-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+.theme-christmas .site-header .header-site-subtitle {
+    color: #93c5fd !important;
+}
+.theme-christmas .hamburger span {
+    background-color: #ffffff !important;
+}
+
+/* Halloween Header */
+.theme-halloween .site-header {
+    background: rgba(18, 7, 32, 0.96) !important;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.3) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6) !important;
+}
+.theme-halloween .site-header .nav-link {
+    color: #f8fafc !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.theme-halloween .site-header .nav-link:hover {
+    color: #fb923c !important;
+    text-shadow: 0 0 12px rgba(251, 146, 60, 0.8);
+}
+.theme-halloween .site-header .header-site-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(234, 88, 12, 0.5);
+}
+.theme-halloween .site-header .header-site-subtitle {
+    color: #d8b4fe !important;
+}
+.theme-halloween .hamburger span {
+    background-color: #ffffff !important;
+}
+
+/* ---------- 9. Product Section Container & Elements ---------- */
+.product-card-container {
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    color: #0f172a;
+    transition: all 0.3s ease;
+}
+
+.section-title {
+    font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif !important;
+    color: #0f172a;
+    font-weight: 800;
+    letter-spacing: 0 !important;
+    line-height: 1.35 !important;
+    display: inline-block;
+}
+.section-subtitle {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    color: #475569;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Filter buttons (Default) */
+.filter-btn {
+    background-color: #f8fafc;
+    color: #1e293b;
+    border: 2px solid #cbd5e1;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.filter-btn:hover {
+    background-color: #ffedd5;
+    color: #ea580c;
+    border-color: #f97316;
+}
+.filter-btn.active {
+    background-color: #ea580c;
+    color: #ffffff;
+    border-color: #ea580c;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+}
+
+/* Sort dropdown */
+.sort-select, select.sort-dropdown {
+    background-color: #ffffff;
+    color: #1e293b;
+    border: 2px solid #cbd5e1;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Empty state */
+.empty-state-box {
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 32px 16px;
+    text-align: center;
+}
+.empty-state-box .empty-text {
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 700;
+}
+.empty-state-box .empty-subtext {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Breadcrumb container */
+.breadcrumb-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.breadcrumb-container a {
+    color: #475569;
+    font-weight: 500;
+}
+.breadcrumb-container a:hover {
+    color: #ea580c;
+}
+.breadcrumb-container strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Product Card */
+.product-item-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    text-decoration: none;
+    display: block;
+}
+.product-item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+.product-item-card .product-code {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+.product-item-card .product-code span {
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 17px;
+}
+.product-item-card .product-price-label {
+    color: #334155;
+    font-weight: 700;
+}
+.product-item-card .product-price-value {
+    color: #dc2626;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+/* Footer Link Contrast */
+footer, .site-footer {
+    background-color: #0b0f19 !important;
+    color: #ffffff !important;
+}
+footer .footer-col-title,
+footer .font-bold {
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+footer a,
+footer a:link,
+footer a:visited,
+footer .footer-link,
+footer li a {
+    color: #cbd5e1 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+footer a:hover,
+footer .footer-link:hover,
+footer li a:hover {
+    color: #fb923c !important;
+    transform: translateX(2px);
+}
+footer .body-html,
+footer .body-html p,
+footer .body-html span,
+footer .body-html div {
+    color: #cbd5e1 !important;
+}
+
+/* Table styling for Nạp UC & details */
+.theme-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+}
+.theme-table th, .theme-table tr:first-child td {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+    padding: 12px 16px;
+    border-bottom: 2px solid #cbd5e1;
+}
+.theme-table td {
+    padding: 12px 16px;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+.theme-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* ==========================================================================
+   10. CHRISTMAS (NOEL) IMMERSIVE FESTIVE STYLING
+   ========================================================================== */
+.theme-christmas .product-card-container {
+    background: rgba(10, 24, 44, 0.92) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(147, 197, 253, 0.3) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(56, 189, 248, 0.15) !important;
+}
+.theme-christmas .section-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 16px rgba(56, 189, 248, 0.8), 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+}
+.theme-christmas .section-subtitle {
+    color: #93c5fd !important;
+}
+.theme-christmas .filter-btn:not(.active) {
+    background: rgba(20, 44, 78, 0.75) !important;
+    color: #e0f2fe !important;
+    border: 1px solid rgba(147, 197, 253, 0.3) !important;
+}
+.theme-christmas .filter-btn:not(.active):hover {
+    background: #1e3a5f !important;
+    border-color: #38bdf8 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+.theme-christmas .filter-btn.active {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    border-color: #fca5a5 !important;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.6) !important;
+}
+.theme-christmas select,
+.theme-christmas .sort-select {
+    background-color: #0f243d !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(147, 197, 253, 0.4) !important;
+}
+.theme-christmas select option,
+.theme-christmas .sort-select option {
+    background-color: #0c1f38 !important;
+    color: #ffffff !important;
+}
+.theme-christmas .product-item-card {
+    background: rgba(15, 34, 60, 0.95) !important;
+    border: 1px solid rgba(147, 197, 253, 0.22) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+}
+.theme-christmas .product-item-card:hover {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35) !important;
+    transform: translateY(-4px);
+}
+.theme-christmas .product-item-card .product-code {
+    color: #94a3b8 !important;
+}
+.theme-christmas .product-item-card .product-code span {
+    color: #ffffff !important;
+}
+.theme-christmas .product-item-card .product-price-label {
+    color: #cbd5e1 !important;
+}
+.theme-christmas .product-item-card .product-price-value {
+    color: #facc15 !important;
+    text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+}
+.theme-christmas .empty-state-box {
+    background: rgba(15, 34, 60, 0.6) !important;
+    border: 2px dashed rgba(147, 197, 253, 0.3) !important;
+}
+.theme-christmas .empty-state-box .empty-text {
+    color: #ffffff !important;
+}
+.theme-christmas .empty-state-box .empty-subtext {
+    color: #93c5fd !important;
+}
+.theme-christmas .breadcrumb-container {
+    background: rgba(10, 24, 44, 0.95) !important;
+    border-bottom: 1px solid rgba(147, 197, 253, 0.2) !important;
+}
+.theme-christmas .breadcrumb-container a {
+    color: #93c5fd !important;
+}
+.theme-christmas .breadcrumb-container strong {
+    color: #ffffff !important;
+}
+.theme-christmas .theme-table {
+    background: rgba(15, 34, 60, 0.95) !important;
+    border: 1px solid rgba(147, 197, 253, 0.25) !important;
+}
+.theme-christmas .theme-table th,
+.theme-christmas .theme-table tr:first-child td {
+    background-color: #17355a !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #38bdf8 !important;
+}
+.theme-christmas .theme-table td {
+    color: #f8fafc !important;
+    border-bottom: 1px solid rgba(147, 197, 253, 0.15) !important;
+}
+.theme-christmas .theme-table td[class*="text-slate-"] {
+    color: #f8fafc !important;
+}
+.theme-christmas .theme-table td[class*="text-emerald-"] {
+    color: #34d399 !important;
+    text-shadow: 0 0 8px rgba(52, 211, 153, 0.4) !important;
+}
+.theme-christmas .theme-table td[class*="text-blue-"] {
+    color: #60a5fa !important;
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4) !important;
+}
+.theme-christmas .theme-table tbody tr:nth-child(even) {
+    background-color: rgba(23, 53, 90, 0.5) !important;
+}
+.theme-christmas .theme-table tbody tr:hover {
+    background-color: rgba(56, 189, 248, 0.12) !important;
+}
+
+/* ==========================================================================
+   11. HALLOWEEN IMMERSIVE CYBER-GOTHIC STYLING
+   ========================================================================== */
+.theme-halloween .product-card-container {
+    background: rgba(20, 9, 36, 0.92) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.15) !important;
+}
+.theme-halloween .section-title {
+    color: #fb923c !important;
+    text-shadow: 0 0 18px rgba(249, 115, 22, 0.8), 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+    -webkit-text-fill-color: #fb923c !important;
+    background: none !important;
+}
+.theme-halloween .section-subtitle {
+    color: #d8b4fe !important;
+}
+.theme-halloween .filter-btn:not(.active) {
+    background: rgba(36, 16, 60, 0.75) !important;
+    color: #f3e8ff !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+}
+.theme-halloween .filter-btn:not(.active):hover {
+    background: #311453 !important;
+    border-color: #ea580c !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 12px rgba(234, 88, 12, 0.45);
+}
+.theme-halloween .filter-btn.active {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+    color: #ffffff !important;
+    border-color: #fed7aa !important;
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.6) !important;
+}
+.theme-halloween select,
+.theme-halloween .sort-select {
+    background-color: #200d38 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(168, 85, 247, 0.45) !important;
+}
+.theme-halloween select option,
+.theme-halloween .sort-select option {
+    background-color: #17072a !important;
+    color: #ffffff !important;
+}
+.theme-halloween .product-item-card {
+    background: rgba(26, 12, 46, 0.95) !important;
+    border: 1px solid rgba(168, 85, 247, 0.25) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+}
+.theme-halloween .product-item-card:hover {
+    border-color: #c084fc !important;
+    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45) !important;
+    transform: translateY(-4px);
+}
+.theme-halloween .product-item-card .product-code {
+    color: #c084fc !important;
+}
+.theme-halloween .product-item-card .product-code span {
+    color: #ffffff !important;
+}
+.theme-halloween .product-item-card .product-price-label {
+    color: #d8b4fe !important;
+}
+.theme-halloween .product-item-card .product-price-value {
+    color: #fb923c !important;
+    text-shadow: 0 0 10px rgba(251, 146, 60, 0.45);
+}
+.theme-halloween .empty-state-box {
+    background: rgba(26, 12, 46, 0.6) !important;
+    border: 2px dashed rgba(168, 85, 247, 0.35) !important;
+}
+.theme-halloween .empty-state-box .empty-text {
+    color: #ffffff !important;
+}
+.theme-halloween .empty-state-box .empty-subtext {
+    color: #d8b4fe !important;
+}
+.theme-halloween .breadcrumb-container {
+    background: rgba(15, 6, 26, 0.95) !important;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.3) !important;
+}
+.theme-halloween .breadcrumb-container a {
+    color: #d8b4fe !important;
+}
+.theme-halloween .breadcrumb-container strong {
+    color: #ffffff !important;
+}
+.theme-halloween .theme-table {
+    background: rgba(26, 12, 46, 0.95) !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+}
+.theme-halloween .theme-table th,
+.theme-halloween .theme-table tr:first-child td {
+    background-color: #321356 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ea580c !important;
+}
+.theme-halloween .theme-table td {
+    color: #f8fafc !important;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2) !important;
+}
+.theme-halloween .theme-table td[class*="text-slate-"] {
+    color: #f8fafc !important;
+}
+.theme-halloween .theme-table td[class*="text-emerald-"] {
+    color: #4ade80 !important;
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.4) !important;
+}
+.theme-halloween .theme-table td[class*="text-blue-"] {
+    color: #38bdf8 !important;
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.4) !important;
+}
+.theme-halloween .theme-table tbody tr:nth-child(even) {
+    background-color: rgba(50, 19, 86, 0.5) !important;
+}
+.theme-halloween .theme-table tbody tr:hover {
+    background-color: rgba(168, 85, 247, 0.15) !important;
+}
+
+/* ==========================================================================
+   12. TẾT & SUMMER ACCENTS
+   ========================================================================== */
+.theme-tet .product-card-container {
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(185, 28, 28, 0.12) !important;
+}
+.theme-tet .section-title {
+    color: #991b1b !important;
+}
+.theme-summer .product-card-container {
+    border-color: rgba(14, 165, 233, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12) !important;
+}
+.theme-summer .section-title {
+    color: #0369a1 !important;
+}
+
+/* ==========================================================================
+   13. DARK THEME HIGH-CONTRAST ENFORCEMENT ("Nền tối thì chữ phải sáng")
+   ========================================================================== */
+.theme-christmas,
+.theme-halloween {
+    color: #f8fafc;
+}
+
+.theme-christmas h1, .theme-christmas h2, .theme-christmas h3, .theme-christmas h4,
+.theme-halloween h1, .theme-halloween h2, .theme-halloween h3, .theme-halloween h4 {
+    color: #ffffff !important;
+}
+
+/* Force bright text on hardcoded dark text classes on dark themes */
+.theme-christmas [class*="text-slate-900"],
+.theme-christmas [class*="text-slate-800"],
+.theme-christmas [class*="text-slate-700"],
+.theme-christmas [class*="text-gray-900"],
+.theme-christmas [class*="text-gray-800"],
+.theme-christmas [class*="text-gray-700"],
+.theme-christmas [class*="text-black"],
+.theme-halloween [class*="text-slate-900"],
+.theme-halloween [class*="text-slate-800"],
+.theme-halloween [class*="text-slate-700"],
+.theme-halloween [class*="text-gray-900"],
+.theme-halloween [class*="text-gray-800"],
+.theme-halloween [class*="text-gray-700"],
+.theme-halloween [class*="text-black"] {
+    color: #f8fafc !important;
+}
+
+.theme-christmas [class*="text-slate-600"],
+.theme-christmas [class*="text-slate-500"],
+.theme-christmas [class*="text-gray-600"],
+.theme-christmas [class*="text-gray-500"],
+.theme-halloween [class*="text-slate-600"],
+.theme-halloween [class*="text-slate-500"],
+.theme-halloween [class*="text-gray-600"],
+.theme-halloween [class*="text-gray-500"] {
+    color: #cbd5e1 !important;
+}
+
+/* Inputs, Labels & Forms in Dark Themes */
+.theme-christmas label,
+.theme-halloween label {
+    color: #f1f5f9 !important;
+    font-weight: 700 !important;
+}
+.theme-christmas input[type="text"],
+.theme-christmas input[type="number"],
+.theme-halloween input[type="text"],
+.theme-halloween input[type="number"] {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 255, 255, 0.25) !important;
+}
+.theme-christmas input[readonly],
+.theme-halloween input[readonly] {
+    background-color: rgba(10, 15, 30, 0.95) !important;
+    color: #f87171 !important;
+    border-color: rgba(248, 113, 113, 0.4) !important;
+}
+
+/* Mobile Drawer Menu in Dark Themes */
+.theme-christmas .header-mobile {
+    background: #091322 !important;
+    color: #ffffff !important;
+}
+.theme-halloween .header-mobile {
+    background: #140722 !important;
+    color: #ffffff !important;
+}
+.theme-christmas .header-mobile a,
+.theme-halloween .header-mobile a {
+    color: #ffffff !important;
+}
+.theme-christmas .header-mobile .close-header,
+.theme-halloween .header-mobile .close-header {
+    color: #ffffff !important;
+}
+.theme-christmas .header-mobile .li-mb,
+.theme-halloween .header-mobile .li-mb {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
